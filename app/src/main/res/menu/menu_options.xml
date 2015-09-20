@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/effect0" android:title="@string/effect0"
+        app:showAsAction="never" />
+
+    <item android:id="@+id/effect1" android:title="@string/effect1"
+        app:showAsAction="never" />
+
+    <item android:id="@+id/effect2" android:title="@string/effect2"
+        app:showAsAction="never" />
+
+    <item android:id="@+id/effect3" android:title="@string/effect3"
+        app:showAsAction="never" />
+
+    <item android:id="@+id/effect4" android:title="@string/effect4"
+        app:showAsAction="never" />
+
+</menu>
