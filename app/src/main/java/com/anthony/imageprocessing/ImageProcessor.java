@@ -39,6 +39,12 @@ public class ImageProcessor {
      */
     public Bitmap getEffect1(int fromColor, int targetColor) {
 
+        int threshold = 60;
+
+        int R = Color.red(fromColor);
+        int G = Color.green(fromColor);
+        int B = Color.blue(fromColor);
+
         if (mImage == null) {
             return null;
         }
@@ -50,9 +56,19 @@ public class ImageProcessor {
 
         mImage.getPixels(pixels, 0, width, 0, 0, width, height);
 
-        for (int x = 0; x < pixels.length; ++x) {
+        int c_R, c_G, c_B = 0;
 
-            pixels[x] = (pixels[x] <= 1.2*fromColor && pixels[x] >= 0.8*fromColor) ? targetColor : pixels[x];
+        for (int index = 0; index < pixels.length; ++index) {
+
+            c_R = Color.red(pixels[index]);
+            c_G = Color.green(pixels[index]);
+            c_B = Color.blue(pixels[index]);
+
+            if(((R - threshold) <= c_R && c_R <= (R + threshold)) &&
+                    ((G - threshold) <= c_G && c_G <= (G + threshold)) &&
+                    ((B - threshold) <= c_B && c_B <= (B + threshold))) {
+                pixels[index] = targetColor;
+            }
 
         }
 
