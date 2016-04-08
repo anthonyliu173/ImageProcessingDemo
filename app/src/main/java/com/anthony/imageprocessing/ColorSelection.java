@@ -86,9 +86,9 @@ public class ColorSelection extends AppCompatActivity{
     private void done(){
 
         Intent returnIntent = new Intent();
-        returnIntent.putExtra("replacedColor", replacedColor);
-        returnIntent.putExtra("replacingColor", replaceColor);
-        setResult(RESULT_OK,returnIntent);
+        returnIntent.putExtra(IntentKeys.REPLACED_COLOR, replacedColor);
+        returnIntent.putExtra(IntentKeys.REPLACING_COLOR, replaceColor);
+        setResult(RESULT_OK, returnIntent);
         finish();
 
     }

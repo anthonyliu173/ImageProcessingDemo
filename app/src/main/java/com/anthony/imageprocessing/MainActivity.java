@@ -146,8 +146,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 if (extras != null) {
 
-                    replacedColor = extras.getInt("replacedColor");
-                    replacingColor = extras.getInt("replacingColor");
+                    replacedColor = extras.getInt(IntentKeys.REPLACED_COLOR);
+                    replacingColor = extras.getInt(IntentKeys.REPLACING_COLOR);
 
                     showEffect();
                 }
