@@ -4,11 +4,12 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
-    <string name="effect0">Effect 1</string>
+    <string name="effect0">Color Replace</string>
     <string name="effect1">Effect 2</string>
     <string name="effect2">Effect 3</string>
     <string name="effect3">Effect 4</string>
     <string name="effect4">Effect 5</string>
+    <string name="effect5">Snow Effect</string>
 
     <string name="please_select_an_image_first">Please select an image first.</string>
     <string name="processing">Processing ... </string>

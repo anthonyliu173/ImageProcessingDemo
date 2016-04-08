@@ -17,4 +17,7 @@
     <item android:id="@+id/effect4" android:title="@string/effect4"
         app:showAsAction="never" />
 
+    <item android:id="@+id/effect5" android:title="@string/effect5"
+        app:showAsAction="never" />
+
 </menu>

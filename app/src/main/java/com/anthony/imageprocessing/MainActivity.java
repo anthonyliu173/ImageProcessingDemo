@@ -78,12 +78,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         switch (item.getItemId()) {
             case R.id.effect0:
-
                 effectType = 0;
-
                 Intent intent = new Intent(MainActivity.this, ColorSelection.class);
                 startActivityForResult(intent, REQUEST_CODE_SELECT_COLOR);
-
                 break;
             case R.id.effect1:
                 effectType = 1;
@@ -100,6 +97,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.effect4:
                 effectType = 4;
                 askForInput(-100, 100);
+                break;
+            case R.id.effect5:
+                effectType = 5;
+                askForInput(0, 255);
                 break;
             default:
                 break;
@@ -236,6 +237,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     return imageProcessor.getEffect4(effectValue);
                 case 4:
                     return imageProcessor.getEffect5(effectValue);
+                case 5:
+                    return imageProcessor.getEffect6(effectValue);
                 default:
                     return null;
             }
