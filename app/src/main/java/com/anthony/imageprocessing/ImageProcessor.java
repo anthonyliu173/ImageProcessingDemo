@@ -34,10 +34,10 @@ public class ImageProcessor {
      *
      * @param fromColor   the color that will be replaced
      * @param targetColor the color that will be changed to
-     *
-     * https://xjaphx.wordpress.com/2011/09/28/image-processing-pixel-color-replacement/
+     *                    <p/>
+     *                    https://xjaphx.wordpress.com/2011/09/28/image-processing-pixel-color-replacement/
      */
-    public Bitmap getEffect1(int fromColor, int targetColor) {
+    public Bitmap getColorReplace(int fromColor, int targetColor) {
 
         int threshold = 60;
 
@@ -64,7 +64,7 @@ public class ImageProcessor {
             c_G = Color.green(pixels[index]);
             c_B = Color.blue(pixels[index]);
 
-            if(((R - threshold) <= c_R && c_R <= (R + threshold)) &&
+            if (((R - threshold) <= c_R && c_R <= (R + threshold)) &&
                     ((G - threshold) <= c_G && c_G <= (G + threshold)) &&
                     ((B - threshold) <= c_B && c_B <= (B + threshold))) {
                 pixels[index] = targetColor;
@@ -84,10 +84,10 @@ public class ImageProcessor {
      * Effect2 - apply hue filter to the image
      *
      * @param level the level of hue
-     *
-     * https://xjaphx.wordpress.com/2011/10/30/image-processing-hue-filter/
-     * */
-    public Bitmap getEffect2(int level) {
+     *              <p/>
+     *              https://xjaphx.wordpress.com/2011/10/30/image-processing-hue-filter/
+     */
+    public Bitmap getHueEffect(int level) {
 
         // get image size
         int width = mImage.getWidth();
@@ -122,15 +122,15 @@ public class ImageProcessor {
 
     /**
      * Effect 3 (Emboss effect) - i have no idea what this is, but it looks damn cool
-     *
+     * <p/>
      * https://xjaphx.wordpress.com/2011/06/22/image-processing-emboss-effect/
-     * */
-    public Bitmap getEffect3() {
+     */
+    public Bitmap getEmbossEffect() {
 
-        double[][] EmbossConfig = new double[][] {
-                { -1 ,  0, -1 },
-                {  0 ,  4,  0 },
-                { -1 ,  0, -1 }
+        double[][] EmbossConfig = new double[][]{
+                {-1, 0, -1},
+                {0, 4, 0},
+                {-1, 0, -1}
         };
         ConvolutionMatrix convMatrix = new ConvolutionMatrix(3);
         convMatrix.applyConfig(EmbossConfig);
@@ -143,10 +143,10 @@ public class ImageProcessor {
 
     /**
      * Effect 4 - smooth effect
-     *
+     * <p/>
      * https://xjaphx.wordpress.com/2011/06/22/image-processing-smooth-effect/
-     * */
-    public Bitmap getEffect4(double value) {
+     */
+    public Bitmap getSmoothEffect(double value) {
 
         ConvolutionMatrix convMatrix = new ConvolutionMatrix(3);
         convMatrix.setAll(1);
@@ -162,10 +162,10 @@ public class ImageProcessor {
      * Effect 5 - brightness effect
      *
      * @param value - level of brightness ... from -100 to 100
-     *
-     * https://xjaphx.wordpress.com/2011/06/22/image-processing-brightness-over-image/
-     * */
-    public Bitmap getEffect5(int value) {
+     *              <p/>
+     *              https://xjaphx.wordpress.com/2011/06/22/image-processing-brightness-over-image/
+     */
+    public Bitmap getBrightnessEffect(int value) {
 
         // image size
         int width = mImage.getWidth();
@@ -177,8 +177,8 @@ public class ImageProcessor {
         int pixel;
 
         // scan through all pixels
-        for(int x = 0; x < width; ++x) {
-            for(int y = 0; y < height; ++y) {
+        for (int x = 0; x < width; ++x) {
+            for (int y = 0; y < height; ++y) {
                 // get pixel color
                 pixel = mImage.getPixel(x, y);
                 A = Color.alpha(pixel);
@@ -188,16 +188,25 @@ public class ImageProcessor {
 
                 // increase/decrease each channel
                 R += value;
-                if(R > 255) { R = 255; }
-                else if(R < 0) { R = 0; }
+                if (R > 255) {
+                    R = 255;
+                } else if (R < 0) {
+                    R = 0;
+                }
 
                 G += value;
-                if(G > 255) { G = 255; }
-                else if(G < 0) { G = 0; }
+                if (G > 255) {
+                    G = 255;
+                } else if (G < 0) {
+                    G = 0;
+                }
 
                 B += value;
-                if(B > 255) { B = 255; }
-                else if(B < 0) { B = 0; }
+                if (B > 255) {
+                    B = 255;
+                } else if (B < 0) {
+                    B = 0;
+                }
 
                 // apply new pixel color to output bitmap
                 newImage.setPixel(x, y, Color.argb(A, R, G, B));
@@ -211,10 +220,10 @@ public class ImageProcessor {
 
     /**
      * Effect 6 - snow effect
-     *
+     * <p/>
      * https://xjaphx.wordpress.com/2011/10/30/image-processing-snow-effect/
-     * */
-    public Bitmap getEffect6(int COLOR_MAX) {
+     */
+    public Bitmap getSnowEffect(int COLOR_MAX) {
 
         // image size
         int width = mImage.getWidth();
@@ -227,8 +236,8 @@ public class ImageProcessor {
 
         int R, G, B, index = 0, thresHold = 50;
         // iteration through pixels
-        for(int y = 0; y < height; ++y) {
-            for(int x = 0; x < width; ++x) {
+        for (int y = 0; y < height; ++y) {
+            for (int x = 0; x < width; ++x) {
                 // get current index in 2D-matrix
                 index = y * width + x;
                 // get color
@@ -237,7 +246,7 @@ public class ImageProcessor {
                 B = Color.blue(pixels[index]);
                 // generate threshold
                 thresHold = random.nextInt(COLOR_MAX);
-                if(R > thresHold && G > thresHold && B > thresHold) {
+                if (R > thresHold && G > thresHold && B > thresHold) {
                     pixels[index] = Color.rgb(COLOR_MAX, COLOR_MAX, COLOR_MAX);
                 }
             }

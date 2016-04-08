@@ -228,17 +228,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             switch (effectType) {
                 case 0:
-                    return imageProcessor.getEffect1(replacedColor == 0 ? Color.BLACK : replacedColor, replacingColor == 0 ? Color.WHITE : replacingColor);
+                    return imageProcessor.getColorReplace(replacedColor == 0 ? Color.BLACK : replacedColor, replacingColor == 0 ? Color.WHITE : replacingColor);
                 case 1:
-                    return imageProcessor.getEffect2(effectValue);
+                    return imageProcessor.getHueEffect(effectValue);
                 case 2:
-                    return imageProcessor.getEffect3();
+                    return imageProcessor.getEmbossEffect();
                 case 3:
-                    return imageProcessor.getEffect4(effectValue);
+                    return imageProcessor.getSmoothEffect(effectValue);
                 case 4:
-                    return imageProcessor.getEffect5(effectValue);
+                    return imageProcessor.getBrightnessEffect(effectValue);
                 case 5:
-                    return imageProcessor.getEffect6(effectValue);
+                    return imageProcessor.getSnowEffect(effectValue);
                 default:
                     return null;
             }
@@ -256,7 +256,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         @Override
         protected void onPreExecute() {
-
+            switch (effectType) {
+                case 1:
+                    Toast.makeText(MainActivity.this, "This will take some time", Toast.LENGTH_LONG).show();
+                    break;
+                case 2:
+                    Toast.makeText(MainActivity.this, "This will take some time", Toast.LENGTH_LONG).show();
+                    break;
+                case 3:
+                    Toast.makeText(MainActivity.this, "This will take some time", Toast.LENGTH_LONG).show();
+                    break;
+                case 4:
+                    Toast.makeText(MainActivity.this, "This will take some time", Toast.LENGTH_LONG).show();
+                    break;
+            }
         }
 
         @Override
