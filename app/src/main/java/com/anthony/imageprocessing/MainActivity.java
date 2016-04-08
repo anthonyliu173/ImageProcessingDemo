@@ -76,34 +76,42 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        switch (item.getItemId()) {
-            case R.id.effect0:
-                effectType = 0;
-                Intent intent = new Intent(MainActivity.this, ColorSelection.class);
-                startActivityForResult(intent, REQUEST_CODE_SELECT_COLOR);
-                break;
-            case R.id.effect1:
-                effectType = 1;
-                askForInput(0, 10);
-                break;
-            case R.id.effect2:
-                effectType = 2;
-                showEffect();
-                break;
-            case R.id.effect3:
-                effectType = 3;
-                askForInput(0, 10);
-                break;
-            case R.id.effect4:
-                effectType = 4;
-                askForInput(-100, 100);
-                break;
-            case R.id.effect5:
-                effectType = 5;
-                askForInput(0, 255);
-                break;
-            default:
-                break;
+        if (bitmap == null) {
+
+            Toast.makeText(MainActivity.this, R.string.please_select_an_image_first, Toast.LENGTH_LONG).show();
+
+        } else {
+
+            switch (item.getItemId()) {
+                case R.id.effect0:
+                    effectType = 0;
+                    Intent intent = new Intent(MainActivity.this, ColorSelection.class);
+                    startActivityForResult(intent, REQUEST_CODE_SELECT_COLOR);
+                    break;
+                case R.id.effect1:
+                    effectType = 1;
+                    askForInput(0, 10);
+                    break;
+                case R.id.effect2:
+                    effectType = 2;
+                    showEffect();
+                    break;
+                case R.id.effect3:
+                    effectType = 3;
+                    askForInput(0, 10);
+                    break;
+                case R.id.effect4:
+                    effectType = 4;
+                    askForInput(-100, 100);
+                    break;
+                case R.id.effect5:
+                    effectType = 5;
+                    askForInput(0, 255);
+                    break;
+                default:
+                    break;
+            }
+
         }
 
         return super.onOptionsItemSelected(item);
@@ -153,8 +161,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     BitmapFactory.Options options = new BitmapFactory.Options();
                     options.inPreferredConfig = Bitmap.Config.ARGB_8888;
                     bitmap = BitmapFactory.decodeFile(photos.get(0), options);
-
-                    showEffect();
+                    imgOriginal.setImageBitmap(bitmap);
+                    imgEffect.setImageBitmap(bitmap);
                 }
             }
 
@@ -163,19 +171,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void showEffect() {
 
-        if (bitmap != null) {
+        imageProcessor.setImage(bitmap);
+        showLoadingWheel();
+        new processEffect().execute();
 
-            imageProcessor.setImage(bitmap);
-            imgOriginal.setImageBitmap(bitmap);
-
-            showLoadingWheel();
-            new processEffect().execute();
-
-        } else {
-
-            Toast.makeText(MainActivity.this, R.string.please_select_an_image_first, Toast.LENGTH_LONG).show();
-
-        }
     }
 
     // Ask user for an input for certain effects
@@ -200,10 +199,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     effectValue = Integer.valueOf(input.getText().toString());
 
-                    if (effectValue >= min && effectValue <= max)
+                    if (effectValue >= min && effectValue <= max) {
                         showEffect();
-                    else
+                    } else {
                         Toast.makeText(MainActivity.this, R.string.please_enter_a_specified_value, Toast.LENGTH_LONG).show();
+                    }
                 } catch (NumberFormatException e) {
                     Toast.makeText(MainActivity.this, R.string.please_enter_a_specified_value, Toast.LENGTH_LONG).show();
                 }
